@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', 'sqlite:///dat
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 # Define a model for your Excel records (adjust column names as needed)
 class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,9 +27,10 @@ class Record(db.Model):
     column9 = db.Column(db.String(255))
     column10 = db.Column(db.String(255))
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
 
 # Endpoint to upload and process an Excel file
 @app.route('/upload', methods=['POST'])
