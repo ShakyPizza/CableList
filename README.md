@@ -14,7 +14,7 @@ CableList is a web-based application designed to quickly search through large Ex
   - Advanced filters with dropdowns for specific columns
 
 ## Project Structure
-```
+
 search-app/
 │── backend/             
 │   ├── app.py           # Flask API for handling file upload and search endpoints
@@ -32,7 +32,7 @@ search-app/
 │   ├── package.json     # React project configuration and dependencies
 │── docker-compose.yml   # Docker configuration for containerized deployment
 │── README.md            # Project documentation (this file)
-```
+
 
 ## Getting Started
 
