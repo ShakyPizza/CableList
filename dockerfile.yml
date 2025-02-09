@@ -1,13 +1,11 @@
-# Use official Python image for Flask backend
+# Use Python for backend
 FROM python:3.10
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy backend files
-COPY backend/ /app/backend/
-
 # Install backend dependencies
+COPY backend/ /app/backend/
 RUN pip install -r backend/requirements.txt
 
 # Install Node.js and React dependencies
@@ -16,8 +14,6 @@ WORKDIR /app/frontend
 COPY frontend/ /app/frontend/
 RUN npm install && npm run build
 
-# Set the working directory back to backend
+# Serve React frontend using Flask
 WORKDIR /app/backend
-
-# Start the Flask server
 CMD ["python", "app.py"]
