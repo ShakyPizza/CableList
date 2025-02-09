@@ -1,4 +1,4 @@
 flask
 flask_cors
-flask_sqlalchemy
+Flask-SQLAlchemy==2.5.1
 pandas
