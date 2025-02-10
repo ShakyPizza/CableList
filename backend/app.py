@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from db import get_db_connection, init_db
 
