@@ -1,49 +1,44 @@
-import React, { useState, useEffect } from "react";
-import "./styles.css"; // Import styles
+import React, { useState } from "react";
+import "./styles.css";
 
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000"; // ✅ Use correct API URL
-
-
-
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
+  const [file, setFile] = useState(null);
+  const [message, setMessage] = useState("");
 
-  const handleSearch = () => {
-    fetch(`${API_URL}/search?q=${query}`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error("Error fetching data:", error));
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
-  fetch(`${API_URL}/search?q=yourQuery`)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error("Error fetching data:", error));
+  const handleUpload = async () => {
+    if (!file) {
+      setMessage("Please select a file to upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch(`${API_URL}/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      setMessage(data.message || data.error);
+    } catch (error) {
+      setMessage("Error uploading file.");
+    }
+  };
 
   return (
-    <div>
-      <h1>📡 Cable List Search</h1>
-      <input
-        type="text"
-        placeholder="Leitaðu eftir kapalnúmeri..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-      <ul>
-        {data.length > 0 ? (
-          data.map((item, index) => (
-            <li key={index}>
-              {item.column1} - {item.column2}
-            </li>
-          ))
-        ) : (
-          <p>No data found.</p>
-        )}
-      </ul>
+    <div className="container">
+      <h1>📡 Upload Excel File</h1>
+      <input type="file" accept=".xlsx,.xls" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button>
+      <p>{message}</p>
     </div>
   );
 }
