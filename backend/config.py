@@ -1,24 +1,15 @@
 import os
 
-class Config:
-    """Base configuration with defaults."""
-    SECRET_KEY = os.getenv("SECRET_KEY", "supersecretkey")
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+# Database configuration
+DB_NAME = os.getenv("DB_NAME", "cables.db")
+DB_USER = os.getenv("DB_USER", "root")  # If using MySQL/PostgreSQL
+DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")  # Default for PostgreSQL
 
-    # Use MySQL/PostgreSQL if DATABASE_URL is set, otherwise fallback to SQLite
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///instance/data.db")
+# Flask settings
+SECRET_KEY = os.getenv("SECRET_KEY", "supersecretkey")
+DEBUG = os.getenv("DEBUG", "True").lower() == "true"
 
-class DevelopmentConfig(Config):
-    """Development-specific configuration."""
-    DEBUG = True
-
-class ProductionConfig(Config):
-    """Production-specific configuration."""
-    DEBUG = False
-
-# Select config based on environment
-ENV = os.getenv("FLASK_ENV", "development")  # 'development' or 'production'
-if ENV == "production":
-    config = ProductionConfig()
-else:
-    config = DevelopmentConfig()
+# CORS settings
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
