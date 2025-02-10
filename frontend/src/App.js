@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./styles.css"; // Import styles
 
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000"; // ✅ Use correct API URL
+
+
+
 
 function App() {
   const [data, setData] = useState([]);
@@ -14,6 +17,11 @@ function App() {
       .then(data => setData(data))
       .catch(error => console.error("Error fetching data:", error));
   };
+
+  fetch(`${API_URL}/search?q=yourQuery`)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error("Error fetching data:", error));
 
   return (
     <div>
