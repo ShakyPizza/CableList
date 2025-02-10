@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from "react";
+import "./styles.css"; // Import styles
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function App() {
   const [data, setData] = useState([]);
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    fetch(`${API_URL}/search?q=test`)
+  const handleSearch = () => {
+    fetch(`${API_URL}/search?q=${query}`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error("Error fetching data:", error));
-  }, []);
+  };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div>
       <h1>📡 Cable List Search</h1>
-      <p>Fetching data from {API_URL}...</p>
+      <input
+        type="text"
+        placeholder="Search cables..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
       <ul>
         {data.length > 0 ? (
           data.map((item, index) => (
