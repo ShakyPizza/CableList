@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css"; // Import styles
 
+
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
       <h1>📡 Cable List Search</h1>
       <input
         type="text"
-        placeholder="Search cables..."
+        placeholder="Leitaðu eftir kapalnúmeri..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
