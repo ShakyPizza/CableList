@@ -16,11 +16,11 @@ RUN npm install && npm run build
 
 # Move React build files to Flask static folder
 WORKDIR /app/backend
-RUN mkdir -p backend/static
+RUN mkdir -p static
 RUN cp -r /app/frontend/build/* /app/backend/static/
 
-# Expose the port Flask runs on (important for Railway)
+# Expose the port Flask runs on
 EXPOSE 5000
 
 # Start Flask backend
-CMD ["python", "app.py"]
+CMD ["python", "backend/app.py"]
