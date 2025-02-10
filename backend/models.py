@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-import os
 
 db = SQLAlchemy()
 
@@ -13,7 +12,7 @@ class Cable(db.Model):
 
 def init_db(app):
     """Initialize the database."""
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///database.db")  # Default to SQLite if MySQL not set
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"  # Update with MySQL if needed
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
     
