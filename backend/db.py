@@ -2,7 +2,7 @@ import os
 import mysql.connector
 
 # Load MySQL connection details from Railway environment variables
-DB_HOST = os.getenv("DB_HOST", "mysql.railway.internal")  # Update this!
+DB_HOST = os.getenv("DB_HOST", "cablelist-production.up.railway.app")  # Update this!
 DB_PORT = os.getenv("DB_PORT", 18658)  # Use Railway's MySQL port
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "IPWOPapVndgFeqvKqAXwRoAlpGwMbMtj")  # Update this!
