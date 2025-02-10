@@ -8,4 +8,4 @@ commands = [
 ]
 
 [start]
-cmd = "python backend/app.py"
+cmd = "python3 backend/app.py"
