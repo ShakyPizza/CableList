@@ -1,9 +1,14 @@
 import os
 from flask import Flask, request, jsonify
 from db import get_db_connection, init_db
+from flask_cors import CORS
+
+
+
+
 
 app = Flask(__name__)
-
+CORS(app)  # Allow frontend to access backend
 # Ensure DB is initialized
 init_db()
 
