@@ -1,0 +1,16 @@
+[phases.setup]
+aptPkgs = ["python3", "python3-pip", "nodejs", "npm"]
+
+[phases.install]
+commands = [
+  "cd backend && pip install -r requirements.txt",
+  "cd frontend && npm install"
+]
+
+[phases.build]
+commands = [
+  "cd frontend && npm run build"
+]
+
+[start]
+cmd = "python backend/app.py"
