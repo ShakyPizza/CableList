@@ -96,7 +96,7 @@ cd search-app
 
 ## Optional Enhancements
 - **User Authentication:**  
-  Integrate Google Sign-In using Firebase or a similar service.
+  Integrate Google Sign-In using Firebase or a similar service. Maybe even authenticator for log in.
 - **CSV Export:**  
   Implement CSV export functionality using packages like `react-csv`.
 - **Advanced Filters:**  
